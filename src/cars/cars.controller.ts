@@ -19,6 +19,11 @@ import { UpdateCarDto } from './dto/update-car.dto';
 export class CarsController {
   constructor(private carsService: CarsService) {}
 
+  @Post()
+  createCar(@Body() createCarDto: CreateCarDto) {
+    return this.carsService.createCar(createCarDto);
+  }
+
   @Get()
   getAllCars() {
     return this.carsService.findAll();
@@ -27,11 +32,6 @@ export class CarsController {
   @Get(':id')
   getCarById(@Param('id', ParseUUIDPipe) id: string) {
     return this.carsService.findOneById(id);
-  }
-
-  @Post()
-  createCar(@Body() createCarDto: CreateCarDto) {
-    return this.carsService.createCar(createCarDto);
   }
 
   @Patch(':id')
